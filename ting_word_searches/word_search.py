@@ -17,4 +17,24 @@ def exists_word(word, instance):
 
 
 def search_by_word(word, instance):
-    """Aqui irá sua implementação"""
+    list_of_words = []
+
+    for item in instance.queue:
+        object_append = {
+            "palavra": word,
+            "arquivo": item["nome_do_arquivo"],
+            "ocorrencias": []
+        }
+        number_line = 1
+        for line in item["linhas_do_arquivo"]:
+            if word.upper() in line.upper():
+                object_append["ocorrencias"].append(
+                    {"linha": number_line, "conteudo": line}
+                )
+            number_line += 1
+
+        if len(object_append["ocorrencias"]) != 0:
+            list_of_words.append(object_append)
+        object_append["ocorrencias"] == []
+
+    return list_of_words
